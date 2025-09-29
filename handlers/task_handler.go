@@ -8,19 +8,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// TaskHandler وظیفه هندل کردن درخواست‌های مربوط به تسک‌ها رو داره
 type TaskHandler struct {
 	service *services.TaskService
 }
 
-// سازنده TaskHandler
 func NewTaskHandler(service *services.TaskService) *TaskHandler {
 	return &TaskHandler{service: service}
 }
 
-// CreateTask -> ایجاد تسک جدید
 func (h *TaskHandler) CreateTask(c *gin.Context) {
-	userID := c.GetString("userID") // گرفتن userID از JWT
+	userID := c.GetString("userID") // JWT
 	var req struct {
 		Title       string `json:"title" binding:"required"`
 		Description string `json:"description"`
@@ -44,7 +41,6 @@ func (h *TaskHandler) CreateTask(c *gin.Context) {
 	c.JSON(http.StatusCreated, task)
 }
 
-// GetTask -> دریافت اطلاعات یک تسک با id
 func (h *TaskHandler) GetTask(c *gin.Context) {
 	id := c.Param("id")
 	task, err := h.service.GetTask(c.Request.Context(), id)
@@ -55,7 +51,6 @@ func (h *TaskHandler) GetTask(c *gin.Context) {
 	c.JSON(http.StatusOK, task)
 }
 
-// ListTasks -> لیست همه تسک‌ها با امکان فیلتر (status, q)
 func (h *TaskHandler) ListTasks(c *gin.Context) {
 	filters := map[string]string{}
 	if status := c.Query("status"); status != "" {
@@ -73,7 +68,6 @@ func (h *TaskHandler) ListTasks(c *gin.Context) {
 	c.JSON(http.StatusOK, tasks)
 }
 
-// UpdateTask -> ویرایش عنوان و توضیحات تسک
 func (h *TaskHandler) UpdateTask(c *gin.Context) {
 	id := c.Param("id")
 	userID := c.GetString("userID")
@@ -107,7 +101,6 @@ func (h *TaskHandler) UpdateTask(c *gin.Context) {
 	c.JSON(http.StatusOK, task)
 }
 
-// DeleteTask -> حذف تسک
 func (h *TaskHandler) DeleteTask(c *gin.Context) {
 	id := c.Param("id")
 	userID := c.GetString("userID")
@@ -129,7 +122,6 @@ func (h *TaskHandler) DeleteTask(c *gin.Context) {
 	c.Status(http.StatusNoContent)
 }
 
-// UpdateStatus -> تغییر وضعیت تسک (todo, in_progress, done)
 func (h *TaskHandler) UpdateStatus(c *gin.Context) {
 	id := c.Param("id")
 	userID := c.GetString("userID")

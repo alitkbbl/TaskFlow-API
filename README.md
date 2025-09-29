@@ -63,4 +63,5 @@ TaskFlow API is a personal and team task management service built with **Golang*
 1. **Clone the Repository**
 ```bash
 git clone https://github.com/your-username/taskflow-api.git
-cd taskflow-api
+cd TaskFlow-API
+go run main.go

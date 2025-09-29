@@ -45,7 +45,7 @@ func main() {
 
 	api := r.Group("/api/v1")
 	{
-		// Auth routes
+		// Auth routes - اضافه کردن این خطوط
 		api.POST("/users/register", authHandler.Register)
 		api.POST("/users/login", authHandler.Login)
 

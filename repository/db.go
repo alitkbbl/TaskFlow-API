@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"taskflow/config"
-	"taskflow/models"
+	"TaskFlowAPI/config"
+	"TaskFlowAPI/models"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"

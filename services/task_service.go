@@ -1,9 +1,9 @@
 package services
 
 import (
+	"TaskFlowAPI/models"
+	"TaskFlowAPI/repository"
 	"context"
-	"taskflow/models"
-	"taskflow/repository"
 )
 
 type TaskService struct {

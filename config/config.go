@@ -1,17 +1,23 @@
 package config
 
 import (
+	"github.com/joho/godotenv"
 	"os"
 )
 
 type Config struct {
 	DBPath        string
 	Port          string
-	JWTSecret     string
-	JWTExpMinutes int
+	JWTSecret     string // secret key
+	JWTExpMinutes int    // expire
 }
 
 func LoadConfig() *Config {
+	err := godotenv.Load()
+	if err != nil {
+		panic("Error loading .env file")
+	}
+
 	return &Config{
 		DBPath:        getEnv("DB_PATH", "taskflow.db"),
 		Port:          getEnv("PORT", "8080"),

@@ -19,7 +19,7 @@ func main() {
 	// DB connection
 	db, err := repository.NewDB(cfg)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err) //print err and return 1 and exit app
 	}
 
 	// Repos
